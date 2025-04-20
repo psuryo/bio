@@ -3,113 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata</title>
+    <title>Biodata Layout</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
+            margin: 20px;
+            background-color: #f4f4f9;
         }
-
-        .card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            overflow: hidden;
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
             text-align: center;
         }
-
-        .card img {
-            width: 100%;
-            height: auto;
-            border-bottom: 3px solid #6c63ff;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #6c63ff;
-        }
-
-        .card-content p {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .skills, .experience {
-            text-align: left;
-            margin: 15px 0;
-        }
-
-        .skills ul, .experience ul {
-            list-style: none;
-            padding-left: 20px;
-        }
-
-        .skills li, .experience li {
-            margin-bottom: 5px;
-        }
-
-        .skills li::before, .experience li::before {
-            content: '✔';
-            margin-right: 8px;
-            color: #6c63ff;
-        }
-
-        @media (max-width: 600px) {
-            .card {
-                max-width: 100%;
-            }
-
-            .card-content h1 {
-                font-size: 20px;
-            }
-
-            .card-content p {
-                font-size: 14px;
-            }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img src="https://via.placeholder.com/400x200" alt="Profile Picture">
-        <div class="card-content">
-            <h1>Nama Lengkap</h1>
-            <p>Skill:</p>
-            <div class="skills">
-                <ul>
-                    <li>HTML & CSS</li>
-                    <li>JavaScript</li>
-                    <li>PHP & MySQL</li>
-                </ul>
-            </div>
-            <p>Pengalaman:</p>
-            <div class="experience">
-                <ul>
-                    <li>Web Developer di XYZ Corp</li>
-                    <li>Freelance Designer</li>
-                    <li>Instruktur Programming</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <h1 style="text-align: center;">My Biodata</h1>
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="2">Personal Information</th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>John Doe</td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>Male</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>john.doe@example.com</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>+123 456 7890</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>123 Main Street, Hometown</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
