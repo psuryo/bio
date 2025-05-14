@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Local Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            max-width: 600px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            flex: 1;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f4f4f4;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .task-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .task-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+        #addTask {
+            background: #4CAF50;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Productivity App</h1>
+        <p>Keep track of your daily tasks</p>
+    </header>
+
+    <main>
+        <h2>To-Do List</h2>
+        <div>
+            <input type="text" id="taskInput" placeholder="Add a new task" />
+            <input type="time" id="taskTime" />
+            <button id="addTask">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Productivity App. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const taskTime = document.getElementById('taskTime');
+        const addTaskButton = document.getElementById('addTask');
+        const taskList = document.getElementById('taskList');
+
+        // Load tasks from local storage
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => addTaskToDOM(task.text, task.time));
+        }
+
+        // Save tasks to local storage
+        function saveTasks() {
+            const tasks = Array.from(taskList.children).map(item => {
+                const text = item.querySelector('.task-text').textContent;
+                const time = item.querySelector('.task-time').textContent;
+                return {text, time};
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Add task to DOM
+        function addTaskToDOM(taskText, taskTime) {
+            const li = document.createElement('li');
+            
+            // Create container for task text and time
+            const taskContainer = document.createElement('div');
+            taskContainer.className = 'task-container';
+            
+            const taskTextSpan = document.createElement('span');
+            taskTextSpan.className = 'task-text';
+            taskTextSpan.textContent = taskText;
+            
+            const taskTimeSpan = document.createElement('span');
+            taskTimeSpan.className = 'task-time';
+            taskTimeSpan.textContent = taskTime;
+            
+            taskContainer.appendChild(taskTextSpan);
+            taskContainer.appendChild(taskTimeSpan);
+            
+            li.appendChild(taskContainer);
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = () => {
+                li.remove();
+                saveTasks();
+            };
+
+            li.appendChild(removeButton);
+            taskList.appendChild(li);
+        }
+
+        // Add task event
+        addTaskButton.onclick = () => {
+            const taskText = taskInput.value.trim();
+            const time = taskTime.value;
+            if (taskText) {
+                addTaskToDOM(taskText, time || 'No time set');
+                saveTasks();
+                taskInput.value = ''; // Clear input
+                taskTime.value = ''; // Clear time
+            }
+        };
+
+        // Initialize
+        loadTasks();
+    </script>
+</body>
+</html>
